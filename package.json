@@ -1,0 +1,22 @@
+{
+  "name": "asyncbuilder",
+  "version": "0.5.0",
+  "description": "simple semi-asynchronous array builder",
+  "main": "asyncbuilder.js",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "underscore": "*",
+    "mocha": "*",
+    "should": "*"
+  },
+  "scripts": {
+    "test": "mocha --ui qunit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jldec/asyncbuilder.git"
+  },
+  "author": "jurgen leschner",
+  "license": "MIT"
+}
