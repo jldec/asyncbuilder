@@ -26,7 +26,7 @@ ab.append(something);
 var asyncCallBack = ab.asyncAppend(); // returns callback
 someAsyncOperation(asyncCallback);
 
-// call this is at least once
+// call this at least once
 ab.complete();
 ```
 
