@@ -17,35 +17,34 @@
 // new is optional
 var ab = new asyncbuilder(mainCallBack);
 
-// call any number of times
-
-// for sync
+// call any number of times... for sync
 ab.append(something);
 
 // or for async
-var asyncCallBack = ab.asyncAppend(); // returns callback
-someAsyncOperation(asyncCallback);
+var cb = ab.asyncAppend();  // returns callback
+someAsyncOperation(cb);
 
 // call this at least once
 ab.complete();
 ```
 
-- `mainCallBack(null,results)` is invoked automatically upon the last async callback
+- no `mainCallBack()` will happen until you issue a `complete()`
+
+- `mainCallBack(null, results)` is invoked once after the last `cb()` with no errors.
+
+- `mainCallBack(err)` is invoked once after the first `cb(err)`.
 
 - the original order of `append()` and `asyncAppend()` operations is respected in the results,
 even if asyncAppend results arrive out of order.
 
 - if there are only append operations, or no appends at all, `complete()`
-will trigger `mainCallBack()` on nextTick
+will trigger `mainCallBack()` on nextTick.
 
-- calling `complete()` before the last `append()` or `asyncAppend()` will result
-in a "premature complete" error.
+- calling `append()` or `asyncAppend()` after `complete()` will result in an error.
 
 ### note
 
-1. you must use `complete()` or no callback will happen
-
-2. it doesn't make sense to call `asyncAppend()` from within an async operation.
+-  it doesn't make sense to call `asyncAppend()` from within an async operation.
    Ordering will be wrong, and `complete()` will probably have been called already.
    Instead, call `asyncAppend()` *before* the async operation
    and pass the function returned by `asyncAppend()` as the operation's async callback

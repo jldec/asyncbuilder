@@ -1,6 +1,6 @@
 {
   "name": "asyncbuilder",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "simple semi-asynchronous array builder",
   "main": "asyncbuilder.js",
   "dependencies": {

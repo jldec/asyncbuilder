@@ -12,9 +12,10 @@ function asyncbuilder(mainCallBack) {
 
   // private
   var results = [];
-  var pending = 0;
-  var isComplete = false;
-  var spent = false;
+  var pending = 0;        // number of outstanding results
+  var isComplete = false; // true after complete()
+  var spent = false;      // true after mainCallBack()
+  var asyncErr = null;    // queued async err
 
   // public
   this.append = append;
@@ -25,9 +26,9 @@ function asyncbuilder(mainCallBack) {
 
   // append result immediately (no callback required)
   function append(result) {
-    if (spent) throw new Error('asyncbuilder.append() after mainCallBack');
+    if (spent) throw new Error('asyncbuilder append after mainCallBack');
     if (isComplete) {
-      completedErr();
+      asyncErr = asyncErr || new Error('asyncbuilder append after complete.');
       return;
     }
     results.push(result);
@@ -36,26 +37,20 @@ function asyncbuilder(mainCallBack) {
   // reserve a slot and return a callback(err, result) for async result
   // the callback inserts the result into the slot (or propagetes any error)
    function asyncAppend() {
-    if (spent) throw new Error('asyncbuilder.asyncAppend() after mainCallBack');
+    if (spent) throw new Error('asyncbuilder asyncAppend after mainCallBack');
     if (isComplete) {
-      completedErr();
+      asyncErr = asyncErr || new Error('asyncbuilder asyncAppend after complete.');
       return function(){};
     }
     var slot = results.push('') - 1;
     pending++;
     return function(err, result) {
-      if (err) {
-        if (!spent) {
-          spent = true;
-          mainCallBack(err);
-        }
-        return;
-      }
-      results[slot] = result;
       pending--;
+      asyncErr = asyncErr || err;
+      results[slot] = result;
       if (isComplete && !spent && !pending) {
         spent = true;
-        mainCallBack(null, results);
+        mainCallBack(asyncErr, results);
       }
     }
   };
@@ -66,18 +61,9 @@ function asyncbuilder(mainCallBack) {
     if (!pending && !spent) {
       spent = true;
       process.nextTick(function() {
-        mainCallBack(null, results);
+        mainCallBack(asyncErr, results);
       });
     }
   };
-
-  function completedErr() {
-    if (!spent) {
-      spent = true;
-      process.nextTick(function() {
-        mainCallBack(new Error('asyncbuilder append after complete.'));
-      });
-    }
-  }
 
 }

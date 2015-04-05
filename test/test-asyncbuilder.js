@@ -14,6 +14,19 @@ test('instanceof', function() {
   builder().should.be.an.instanceof(builder);
 });
 
+test('no append or asyncAppend', function(done) {
+  var completed = false;
+  var ab = builder(function(err, data) {
+    data.should.eql([]);
+    (err === null).should.be.true;
+    completed.should.be.true;
+    done();
+  });
+
+  ab.complete();
+  completed = true;
+});
+
 test('append only without async', function(done) {
   var completed = false;
   var ab = builder(function(err, data) {
@@ -28,7 +41,7 @@ test('append only without async', function(done) {
   ab.append(3);
   ab.append(4);
   ab.complete();
-  completed = true; // this should happen before builder callback
+  completed = true;
 });
 
 test('append/asyncAppend ordering is preserved', function(done) {
@@ -48,7 +61,26 @@ test('append/asyncAppend ordering is preserved', function(done) {
   setTimeout(cb2, 10); // last async operation finishes first
 });
 
-test('single async error', function(done) {
+test('async error after other callback', function(done) {
+  var callbackCalled = false;
+  var ab = builder(function(err, data) {
+    callbackCalled.should.be.false;
+    callbackCalled = true;
+    err.should.be.an.Error;
+    done();
+  });
+
+  ab.append(1);
+  var cb1 = _.partial(ab.asyncAppend(), null, 2);
+  ab.append(3);
+  var cb2 = _.partial(ab.asyncAppend(), new Error('error in cb2'));
+  ab.complete();
+
+  setTimeout(cb1, 10);
+  setTimeout(cb2, 20);
+});
+
+test('async error before other callback', function(done) {
   var callbackCalled = false;
   var ab = builder(function(err, data) {
     callbackCalled.should.be.false;
@@ -230,8 +262,7 @@ test('duplicate callbacks ok', function(done) {
   setTimeout(cb1, 20);
 });
 
-
-test('premature callback ok', function(done) {
+test('premature non-error callback ok', function(done) {
   var callbackCalled = false;
   var ab = builder(function(err, data) {
     callbackCalled.should.be.false;
@@ -243,6 +274,22 @@ test('premature callback ok', function(done) {
 
   ab.append(1);
   ab.asyncAppend()(null, 2);
+  ab.append(3);
+  ab.append(4);
+  ab.complete();
+});
+
+test('premature callback error ok', function(done) {
+  var callbackCalled = false;
+  var ab = builder(function(err, data) {
+    callbackCalled.should.be.false;
+    callbackCalled = true;
+    err.should.be.an.Error;
+    done();
+  });
+
+  ab.append(1);
+  ab.asyncAppend()(new Error('premature callback error'));
   ab.append(3);
   ab.append(4);
   ab.complete();
