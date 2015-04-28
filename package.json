@@ -1,14 +1,14 @@
 {
   "name": "asyncbuilder",
-  "version": "0.6.0",
+  "version": "1.0.0",
   "description": "simple semi-asynchronous array builder",
   "main": "asyncbuilder.js",
   "dependencies": {
   },
   "devDependencies": {
-    "underscore": "*",
-    "mocha": "*",
-    "should": "*"
+    "underscore": "^1.8.3",
+    "mocha": "^2.2.4",
+    "should": "^6.0.1"
   },
   "scripts": {
     "test": "mocha --ui qunit"
