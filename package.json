@@ -1,12 +1,12 @@
 {
   "name": "asyncbuilder",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "simple semi-asynchronous array builder",
   "main": "asyncbuilder.js",
   "dependencies": {},
   "devDependencies": {
-    "lodash.partial": "^3.1.1",
-    "tape": "^4.2.2"
+    "lodash.partial": "^4.2.1",
+    "tape": "^4.9.0"
   },
   "scripts": {
     "test": "tape test/*.js"
