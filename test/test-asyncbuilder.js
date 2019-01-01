@@ -4,7 +4,9 @@
  *
 **/
 
-var test = require('tape')
+/*eslint no-unused-vars: ["error", { "args": "none" }]*/
+
+var test = require('tape');
 var partial = require('lodash.partial');
 
 var builder = require('../asyncbuilder');
@@ -20,7 +22,7 @@ test('no append or asyncAppend', function(t) {
     t.deepEqual(data, []);
     t.equal(err, null);
     t.true(completed);
-    t.end()
+    t.end();
   });
 
   ab.complete();
@@ -33,7 +35,7 @@ test('append only without async', function(t) {
     t.deepEqual(data[1,2,3,4]);
     t.equal(err, null);
     t.true(completed);
-    t.end()
+    t.end();
   });
 
   ab.append(1);
@@ -48,7 +50,7 @@ test('append/asyncAppend ordering is preserved', function(t) {
   var ab = builder(function(err, data) {
     t.deepEqual(data[1,2,3,4]);
     t.equal(err, null);
-    t.end()
+    t.end();
   });
 
   ab.append(1);
@@ -67,7 +69,7 @@ test('async error after other callback', function(t) {
     t.false(callbackCalled);
     callbackCalled = true;
     t.true(err instanceof Error);
-    t.end()
+    t.end();
   });
 
   ab.append(1);
@@ -86,7 +88,7 @@ test('async error before other callback', function(t) {
     t.false(callbackCalled);
     callbackCalled = true;
     t.true(err instanceof Error);
-    t.end()
+    t.end();
   });
 
   ab.append(1);
@@ -106,7 +108,7 @@ test('multiple async errors', function(t) {
     t.false(callbackCalled);
     callbackCalled = true;
     t.true(err instanceof Error);
-    t.end()
+    t.end();
   });
 
   ab.append(1);
@@ -145,7 +147,7 @@ test('also works with new', function(t) {
     t.true(ab instanceof Builder);
     t.deepEqual(data[1,2,3,4]);
     t.equal(err, null);
-    t.end()
+    t.end();
   });
 
   var cb1 = partial(ab.asyncAppend(), null, 1);
@@ -162,7 +164,7 @@ test('noop builder returns []', function(t) {
   var ab = builder(function(err, data) {
     t.deepEqual(data, []);
     t.equal(err, null);
-    t.end()
+    t.end();
   });
 
   ab.complete();
@@ -171,7 +173,7 @@ test('noop builder returns []', function(t) {
 test('asyncAppend() after complete() returns error', function(t) {
   var ab = builder(function(err, data) {
     t.true(err instanceof Error);
-    t.end()
+    t.end();
   });
 
   var cb1 = partial(ab.asyncAppend(), null, 1);
@@ -186,7 +188,7 @@ test('append() after mainCallBack throws', function(t) {
   var ab = builder(function(err, data) {
     t.deepEqual(data[1,2]);
     t.equal(err, null);
-    t.end()
+    t.end();
   });
 
   ab.append(1);
@@ -199,7 +201,7 @@ test('asyncAppend() after mainCallBack throws', function(t) {
   var ab = builder(function(err, data) {
     t.deepEqual(data[1,2]);
     t.equal(err, null);
-    t.end()
+    t.end();
   });
 
   ab.append(1);
@@ -212,7 +214,7 @@ test('missing complete() times out', function(t) {
   var callbackCalled = false;
   setTimeout(function() {
     t.false(callbackCalled);
-    t.end()
+    t.end();
   }, 100);
   var ab = builder(function(err, data) {
     callbackCalled = true;
@@ -230,7 +232,7 @@ test('multiple complete() ok', function(t) {
     callbackCalled = true;
     t.deepEqual(data[1,2,3,4]);
     t.equal(err, null);
-    t.end()
+    t.end();
   });
 
   ab.append(1);
@@ -250,7 +252,7 @@ test('duplicate callbacks ok', function(t) {
     callbackCalled = true;
     t.deepEqual(data[1,2,3,4]);
     t.equal(err, null);
-    t.end()
+    t.end();
   });
 
   ab.append(1);
@@ -269,7 +271,7 @@ test('premature non-error callback ok', function(t) {
     callbackCalled = true;
     t.deepEqual(data[1,2,3,4]);
     t.equal(err, null);
-    t.end()
+    t.end();
   });
 
   ab.append(1);
@@ -285,7 +287,7 @@ test('premature callback error ok', function(t) {
     t.false(callbackCalled);
     callbackCalled = true;
     t.true(err instanceof Error);
-    t.end()
+    t.end();
   });
 
   ab.append(1);

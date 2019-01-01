@@ -1,4 +1,5 @@
 # asyncbuilder
+[![Build Status](https://api.travis-ci.org/jldec/asyncbuilder.svg?branch=master)](https://travis-ci.org/jldec/asyncbuilder)
 
 - builds an array containing a mix of immediate and async results
 - follows node convention of using callbacks with signature `cb(err, results)`
@@ -51,4 +52,4 @@ will trigger `mainCallBack()` on nextTick.
 
 ### license
 
-(c) 2015-2018 Jürgen Leschner, [MIT](http://opensource.org/licenses/MIT) license
+(c) 2015-2019 Jürgen Leschner, [MIT](http://opensource.org/licenses/MIT) license

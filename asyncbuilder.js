@@ -32,11 +32,11 @@ function asyncbuilder(mainCallBack) {
       return;
     }
     results.push(result);
-  };
+  }
 
   // reserve a slot and return a callback(err, result) for async result
   // the callback inserts the result into the slot (or propagetes any error)
-   function asyncAppend() {
+  function asyncAppend() {
     if (spent) throw new Error('asyncbuilder asyncAppend after mainCallBack');
     if (isComplete) {
       asyncErr = asyncErr || new Error('asyncbuilder asyncAppend after complete.');
@@ -52,8 +52,8 @@ function asyncbuilder(mainCallBack) {
         spent = true;
         mainCallBack(asyncErr, results);
       }
-    }
-  };
+    };
+  }
 
   // call ab.complete() after the last append() or asyncAppend()
   function complete() {
@@ -64,6 +64,6 @@ function asyncbuilder(mainCallBack) {
         mainCallBack(asyncErr, results);
       });
     }
-  };
+  }
 
 }
