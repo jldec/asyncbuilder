@@ -1,4 +1,5 @@
 # asyncbuilder
+[![Azure Build Status](https://dev.azure.com/jldec/asyncbuilder/_apis/build/status/jldec.asyncbuilder?branchName=master)](https://dev.azure.com/jldec/asyncbuilder/_build/latest?definitionId=1&branchName=master)
 [![Build Status](https://api.travis-ci.org/jldec/asyncbuilder.svg?branch=master)](https://travis-ci.org/jldec/asyncbuilder)
 
 - builds an array containing a mix of immediate and async results
