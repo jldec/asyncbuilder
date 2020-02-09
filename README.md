@@ -1,3 +1,5 @@
+![CI](https://github.com/jldec/asyncbuilder/workflows/CI/badge.svg)
+
 # asyncbuilder
 - builds an array containing a mix of immediate and async results
 - follows node convention of using callbacks with signature `cb(err, results)`
