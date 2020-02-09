@@ -1,7 +1,4 @@
 # asyncbuilder
-[![Azure Build Status](https://dev.azure.com/jldec/asyncbuilder/_apis/build/status/jldec.asyncbuilder?branchName=master)](https://dev.azure.com/jldec/asyncbuilder/_build/latest?definitionId=1&branchName=master)
-[![Build Status](https://api.travis-ci.org/jldec/asyncbuilder.svg?branch=master)](https://travis-ci.org/jldec/asyncbuilder)
-
 - builds an array containing a mix of immediate and async results
 - follows node convention of using callbacks with signature `cb(err, results)`
 - useful for building a sequential list in the order that async operations
@@ -53,4 +50,4 @@ will trigger `mainCallBack()` on nextTick.
 
 ### license
 
-(c) 2015-2019 Jürgen Leschner, [MIT](https://opensource.org/licenses/MIT) license
+(c) 2015-2020 Jürgen Leschner, [MIT](https://opensource.org/licenses/MIT) license
