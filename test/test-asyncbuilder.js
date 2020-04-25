@@ -32,7 +32,7 @@ test('no append or asyncAppend', function(t) {
 test('append only without async', function(t) {
   var completed = false;
   var ab = builder(function(err, data) {
-    t.deepEqual(data[1,2,3,4]);
+    t.deepEqual(data, [1,2,3,4]);
     t.equal(err, null);
     t.true(completed);
     t.end();
@@ -48,7 +48,7 @@ test('append only without async', function(t) {
 
 test('append/asyncAppend ordering is preserved', function(t) {
   var ab = builder(function(err, data) {
-    t.deepEqual(data[1,2,3,4]);
+    t.deepEqual(data, [1,2,3,4]);
     t.equal(err, null);
     t.end();
   });
@@ -145,7 +145,7 @@ test('also works with new', function(t) {
   var Builder = require('../asyncbuilder');
   var ab = new Builder(function(err, data) {
     t.true(ab instanceof Builder);
-    t.deepEqual(data[1,2,3,4]);
+    t.deepEqual(data, [1,2,3,4]);
     t.equal(err, null);
     t.end();
   });
@@ -186,7 +186,7 @@ test('asyncAppend() after complete() returns error', function(t) {
 
 test('append() after mainCallBack throws', function(t) {
   var ab = builder(function(err, data) {
-    t.deepEqual(data[1,2]);
+    t.deepEqual(data, [1,2]);
     t.equal(err, null);
     t.end();
   });
@@ -199,7 +199,7 @@ test('append() after mainCallBack throws', function(t) {
 
 test('asyncAppend() after mainCallBack throws', function(t) {
   var ab = builder(function(err, data) {
-    t.deepEqual(data[1,2]);
+    t.deepEqual(data, [1,2]);
     t.equal(err, null);
     t.end();
   });
@@ -230,7 +230,7 @@ test('multiple complete() ok', function(t) {
   var ab = builder(function(err, data) {
     t.false(callbackCalled);
     callbackCalled = true;
-    t.deepEqual(data[1,2,3,4]);
+    t.deepEqual(data, [1,2,3,4]);
     t.equal(err, null);
     t.end();
   });
@@ -250,7 +250,7 @@ test('duplicate callbacks ok', function(t) {
   var ab = builder(function(err, data) {
     t.false(callbackCalled);
     callbackCalled = true;
-    t.deepEqual(data[1,2,3,4]);
+    t.deepEqual(data, [1,2,3,4]);
     t.equal(err, null);
     t.end();
   });
@@ -269,7 +269,7 @@ test('premature non-error callback ok', function(t) {
   var ab = builder(function(err, data) {
     t.false(callbackCalled);
     callbackCalled = true;
-    t.deepEqual(data[1,2,3,4]);
+    t.deepEqual(data, [1,2,3,4]);
     t.equal(err, null);
     t.end();
   });
