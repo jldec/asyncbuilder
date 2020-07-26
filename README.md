@@ -1,4 +1,4 @@
-![CI](https://github.com/jldec/asyncbuilder/workflows/CI/badge.svg)
+[![CI](https://github.com/jldec/asyncbuilder/workflows/CI/badge.svg)](https://github.com/jldec/asyncbuilder/actions)
 
 # asyncbuilder
 - builds an array containing a mix of immediate and async results
