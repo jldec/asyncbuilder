@@ -5,7 +5,7 @@
   "main": "asyncbuilder.js",
   "dependencies": {},
   "devDependencies": {
-    "eslint": "^7.5.0",
+    "eslint": "^7.13.0",
     "lodash.partial": "^4.2.1",
     "tape": "^5.0.1"
   },
