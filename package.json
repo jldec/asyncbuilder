@@ -1,13 +1,13 @@
 {
   "name": "asyncbuilder",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "simple semi-asynchronous array builder",
   "main": "asyncbuilder.js",
   "dependencies": {},
   "devDependencies": {
-    "eslint": "^7.13.0",
+    "eslint": "^8.6.0",
     "lodash.partial": "^4.2.1",
-    "tape": "^5.0.1"
+    "tape": "^5.4.0"
   },
   "files": [
     "asyncbuilder.js"

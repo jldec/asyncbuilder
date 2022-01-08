@@ -1,7 +1,7 @@
 /*
  * asyncbuilder
  * simple semi-asynchronous list builder
- * copyright 2015-2020, Jürgen Leschner - github.com/jldec - MIT license
+ * Copyright (c) 2015-2021 Jürgen Leschner - github.com/jldec - MIT license
 */
 
 module.exports = asyncbuilder;
