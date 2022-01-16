@@ -5,9 +5,9 @@
   "main": "asyncbuilder.js",
   "dependencies": {},
   "devDependencies": {
-    "eslint": "^8.6.0",
+    "eslint": "^8.7.0",
     "lodash.partial": "^4.2.1",
-    "tape": "^5.4.0"
+    "tape": "^5.4.1"
   },
   "files": [
     "asyncbuilder.js"
