@@ -52,4 +52,4 @@ will trigger `mainCallBack()` on nextTick.
 
 ### license
 
-(c) 2015-2021 Jürgen Leschner, [MIT](https://opensource.org/licenses/MIT) license
+Copyright (c) 2015-2022, Jürgen Leschner, [MIT](https://opensource.org/licenses/MIT) license
